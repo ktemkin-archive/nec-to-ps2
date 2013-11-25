@@ -172,12 +172,12 @@ begin
 
     if rising_edge(clk_32MHz) then
 
-      --Once we receieve a new packet, mark the given key as pressed.
+      --Once we receive a new packet, mark the given key as pressed.
       if packet_received = '1' then
         key_down <= '1';
 
-      --If we've receieved a new command packet, we must be starting
-      --a new button press. Inidcate a key release.
+      --If we've received a new command packet, we must be starting
+      --a new button press. Indicate a key release.
       elsif command_packet_started = '1' then
         key_down <= '0';
 
@@ -236,7 +236,6 @@ begin
 
       --
       -- State in which we wait for receipt of the IR code to begin.
-      -- We'll wait for the 
       -- 
       when WAIT_FOR_HEADER =>
 
@@ -388,7 +387,7 @@ begin
       when COUNT_DATA_PULSE_SPACING =>
 
         --If we've just received the start of a new pulse,
-        --handle the old pulses's timing.
+        --handle the old pulse's timing.
         if nec_in = '1' then
 
           --Indicate that we've received a data bit.
