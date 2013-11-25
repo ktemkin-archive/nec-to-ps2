@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="/home/ktemkin/Documents/Teaching/251/Project/nec-to-ps2/nec_receiver_testbench_isim_beh.wdb" id="1" type="auto">
+         <top_modules>
+            <top_module name="nec_receiver_testbench" />
+            <top_module name="numeric_std" />
+            <top_module name="std_logic_1164" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <WVObjectSize size="9" />
+   <wave_markers>
+      <marker time="14447000000000" label="" />
+      <marker time="10022000000000" label="" />
+      <marker time="117598015625000" label="" />
+      <marker time="120395015625000" label="" />
+   </wave_markers>
+   <wvobject fp_name="/nec_receiver_testbench/clk_32mhz" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">clk_32mhz</obj_property>
+      <obj_property name="ObjectShortName">clk_32mhz</obj_property>
+   </wvobject>
+   <wvobject fp_name="/nec_receiver_testbench/ir_input" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">ir_input</obj_property>
+      <obj_property name="ObjectShortName">ir_input</obj_property>
+   </wvobject>
+   <wvobject fp_name="/nec_receiver_testbench/nec_in" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">nec_in</obj_property>
+      <obj_property name="ObjectShortName">nec_in</obj_property>
+   </wvobject>
+   <wvobject fp_name="/nec_receiver_testbench/IR_RX/current_state" type="other" db_ref_id="1">
+      <obj_property name="ElementShortName">current_state</obj_property>
+      <obj_property name="ObjectShortName">current_state</obj_property>
+   </wvobject>
+   <wvobject fp_name="/nec_receiver_testbench/IR_RX/is_rising_edge_of_input" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">is_rising_edge_of_input</obj_property>
+      <obj_property name="ObjectShortName">is_rising_edge_of_input</obj_property>
+   </wvobject>
+   <wvobject fp_name="/nec_receiver_testbench/IR_RX/pulse_counter_value" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">pulse_counter_value[4:0]</obj_property>
+      <obj_property name="ObjectShortName">pulse_counter_value[4:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+   </wvobject>
+   <wvobject fp_name="/nec_receiver_testbench/IR_RX/repeat_code_received" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">repeat_code_received</obj_property>
+      <obj_property name="ObjectShortName">repeat_code_received</obj_property>
+   </wvobject>
+   <wvobject fp_name="/nec_receiver_testbench/last_received_command" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">last_received_command[7:0]</obj_property>
+      <obj_property name="ObjectShortName">last_received_command[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/nec_receiver_testbench/key_down" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">key_down</obj_property>
+      <obj_property name="ObjectShortName">key_down</obj_property>
+   </wvobject>
+</wave_config>
