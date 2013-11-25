@@ -51,11 +51,19 @@ begin
   --Main stimulus process. This process applies the captured waveforms.
   process
   begin
+
+
     --Loop through all of the captured samples.
     for i in 0 to 72 loop
       wait for duration_of_previous_sample(i);
       ir_input <= ir_input_samples(i);
     end loop;
+
+    --If you're interested in seeing the key timeout, you'll want to uncomment this last line.
+    --Otherwise, the captured waveform will be rendered periodically.
+    --wait;
+
+
   end process;
 
 end captured_waveforms;

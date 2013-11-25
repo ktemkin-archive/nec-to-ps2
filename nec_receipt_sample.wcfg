@@ -11,7 +11,7 @@
          </top_modules>
       </db_ref>
    </db_ref_list>
-   <WVObjectSize size="9" />
+   <WVObjectSize size="5" />
    <wave_markers>
       <marker time="14447000000000" label="" />
       <marker time="10022000000000" label="" />
@@ -29,23 +29,6 @@
    <wvobject fp_name="/nec_receiver_testbench/nec_in" type="logic" db_ref_id="1">
       <obj_property name="ElementShortName">nec_in</obj_property>
       <obj_property name="ObjectShortName">nec_in</obj_property>
-   </wvobject>
-   <wvobject fp_name="/nec_receiver_testbench/IR_RX/current_state" type="other" db_ref_id="1">
-      <obj_property name="ElementShortName">current_state</obj_property>
-      <obj_property name="ObjectShortName">current_state</obj_property>
-   </wvobject>
-   <wvobject fp_name="/nec_receiver_testbench/IR_RX/is_rising_edge_of_input" type="logic" db_ref_id="1">
-      <obj_property name="ElementShortName">is_rising_edge_of_input</obj_property>
-      <obj_property name="ObjectShortName">is_rising_edge_of_input</obj_property>
-   </wvobject>
-   <wvobject fp_name="/nec_receiver_testbench/IR_RX/pulse_counter_value" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">pulse_counter_value[4:0]</obj_property>
-      <obj_property name="ObjectShortName">pulse_counter_value[4:0]</obj_property>
-      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
-   </wvobject>
-   <wvobject fp_name="/nec_receiver_testbench/IR_RX/repeat_code_received" type="logic" db_ref_id="1">
-      <obj_property name="ElementShortName">repeat_code_received</obj_property>
-      <obj_property name="ObjectShortName">repeat_code_received</obj_property>
    </wvobject>
    <wvobject fp_name="/nec_receiver_testbench/last_received_command" type="array" db_ref_id="1">
       <obj_property name="ElementShortName">last_received_command[7:0]</obj_property>

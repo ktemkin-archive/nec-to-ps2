@@ -56,7 +56,12 @@ architecture behavioral of nec_receiver is
   -- window can be used to detect whether the packet is a repeat command.
   constant HEADER_REPEAT_WINDOW_START  : integer := 73600;
 
+  -- Stores the minimum pulse distance which should be considered a one. Taken directly from the NEC spec.
   constant DATA_MINIMUM_TIME_FOR_ONE   : integer := 18000;
+
+  -- Stores the maximum amount of time we'll wait for a "repeat packet". If we don't receieve a repeat
+  -- packet in this time, we'll decide that the key must have been released.
+  constant KEY_PRESS_TIMEOUT : integer := 3456000 + 1000;
 
   --
   --Core controller FSM logic.
@@ -68,7 +73,7 @@ architecture behavioral of nec_receiver is
   signal next_state, next_state_with_reset : receiver_state;
 
   -- Control output signals.
-  signal repeat_code_received : std_ulogic;
+  signal repeat_code_received, command_packet_started : std_ulogic;
   signal data_bit_received, packet_received : std_ulogic;
 
   --
@@ -77,8 +82,7 @@ architecture behavioral of nec_receiver is
 
   --Time counter, which counts the amount of time that has passed.
   signal time_counter_clear : std_ulogic;
-  signal time_counter_value : unsigned(18 downto 0);
-  signal time_counter_next_value : unsigned(18 downto 0);
+  signal time_counter_value : unsigned(21 downto 0) := (others => '0');
 
   --Comparator output, which determine if the current time counter
   --value would be interpreted as a '0' or a '1' when interpreted as
@@ -89,12 +93,11 @@ architecture behavioral of nec_receiver is
   signal prior_input_value, is_rising_edge_of_input : std_ulogic;
   signal pulse_counter_clear          : std_ulogic;
   signal pulse_counter_value          : unsigned(4 downto 0);
-  signal pulse_counter_next_value     : unsigned(4 downto 0);
 
   -- "Shift register" which stores the 16 most recent received bits.
   signal received_bits      : std_ulogic_vector(15 downto 0);
-  signal received_bits_next : std_ulogic_vector(15 downto 0);
   signal data_is_valid : std_ulogic;
+
 
 begin
 
@@ -163,6 +166,32 @@ begin
   last_received_command <= received_bits(7 downto 0) when rising_edge(clk_32MHz) and data_is_valid = '1' and packet_received = '1';
 
 
+  --KEY_PRESS_TRACKER:
+  process(clk_32MHz)
+  begin
+
+    if rising_edge(clk_32MHz) then
+
+      --Once we receieve a new packet, mark the given key as pressed.
+      if packet_received = '1' then
+        key_down <= '1';
+
+      --If we've receieved a new command packet, we must be starting
+      --a new button press. Inidcate a key release.
+      elsif command_packet_started = '1' then
+        key_down <= '0';
+
+      -- If we're able to reach the keypress timeout without a new 
+      -- key press occurring, then indicate a key release.
+      elsif time_counter_value > KEY_PRESS_TIMEOUT  then
+        key_down <= '0';
+      end if;
+
+
+    end if;
+  end process;
+
+
   --
   -- Controller.
   --
@@ -186,11 +215,12 @@ begin
 
     --Assume that the control signals are zero unless explicitly
     --asserted.
+    packet_received <= '0';
+    data_bit_received <= '0';
     time_counter_clear <= '0';
     pulse_counter_clear <= '0';
     repeat_code_received <= '0';
-    data_bit_received <= '0';
-    packet_received <= '0';
+    command_packet_started <= '0';
 
     --Assume that we stay in the current state, unless the FSM
     --specifies otherwise. (Don't remove this! The behavior may
@@ -210,13 +240,17 @@ begin
       -- 
       when WAIT_FOR_HEADER =>
 
-        --Ensure that the core time counter remains at zero.
-        time_counter_clear <= '1';
-
         --Remain in this state until the IR receiver input goes high,
         --indicating the start of the NEC frame.
         if nec_in = '1' then
+
+          --Once we're receiveing the start pulse, move to the "read header"
+          --state.
           next_state <= READ_HEADER;
+
+          --Once we've ready to move to the READ_HEADER state,
+          --reset the time counter.
+          time_counter_clear <= '1';
         end if;
 
 
@@ -278,6 +312,11 @@ begin
             --be used by the wait for command state.
             pulse_counter_clear <= '1';
 
+            -- Set the control signal that indicates that we've
+            -- startad a new command packet. This clears the current
+            -- "keypress" state.
+            command_packet_started <= '1';
+
           end if;
 
         end if;
@@ -288,6 +327,11 @@ begin
       -- before we can detect a subsequent packet.
       -- 
       when WAIT_FOR_IDLE =>
+
+        --Ensure that the core time counter remains at zero.
+        --We'll use this in the "wait for idle" state to keep track
+        --of the time since the last keypress.
+        time_counter_clear <= '1';
 
         --Once the line has become idle, resume waiting for the header.
         if nec_in = '0' then
@@ -379,7 +423,7 @@ begin
 
         --And move to the "wait for idle" state.
         --This state waits for the line to go idle, and then restarts.
-        next_State <= WAIT_FOR_IDLE;
+        next_state <= WAIT_FOR_IDLE;
 
 
     end case;
