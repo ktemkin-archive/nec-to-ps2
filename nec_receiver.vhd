@@ -40,7 +40,7 @@ entity nec_receiver is
 end nec_receiver;
 
 
-architecture behavioral of nec_receiver is
+architecture asm_with_datapath of nec_receiver is
 
   --
   -- NEC protocol timings.
@@ -424,13 +424,7 @@ begin
         --This state waits for the line to go idle, and then restarts.
         next_state <= WAIT_FOR_IDLE;
 
-
     end case;
-
   end process;
-
-  
-
-
-end Behavioral;
+end asm_with_datapath;
 

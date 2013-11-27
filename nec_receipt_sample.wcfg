@@ -3,39 +3,48 @@
    <wave_state>
    </wave_state>
    <db_ref_list>
-      <db_ref path="/home/ktemkin/Documents/Teaching/251/Project/nec-to-ps2/nec_receiver_testbench_isim_beh.wdb" id="1" type="auto">
+      <db_ref path="/home/ktemkin/Documents/Teaching/251/Project/nec-to-ps2/ps2_transmitter_testbench_isim_beh.wdb" id="1" type="auto">
          <top_modules>
-            <top_module name="nec_receiver_testbench" />
+            <top_module name="attributes" />
             <top_module name="numeric_std" />
+            <top_module name="ps2_transmitter_testbench" />
             <top_module name="std_logic_1164" />
+            <top_module name="std_logic_misc" />
          </top_modules>
       </db_ref>
    </db_ref_list>
-   <WVObjectSize size="5" />
+   <WVObjectSize size="6" />
    <wave_markers>
       <marker time="14447000000000" label="" />
       <marker time="10022000000000" label="" />
       <marker time="117598015625000" label="" />
       <marker time="120395015625000" label="" />
+      <marker time="1349984375000" label="" />
+      <marker time="1299984375000" label="" />
    </wave_markers>
-   <wvobject fp_name="/nec_receiver_testbench/clk_32mhz" type="logic" db_ref_id="1">
+   <wvobject fp_name="/ps2_transmitter_testbench/clk_32mhz" type="logic" db_ref_id="1">
       <obj_property name="ElementShortName">clk_32mhz</obj_property>
       <obj_property name="ObjectShortName">clk_32mhz</obj_property>
    </wvobject>
-   <wvobject fp_name="/nec_receiver_testbench/ir_input" type="logic" db_ref_id="1">
-      <obj_property name="ElementShortName">ir_input</obj_property>
-      <obj_property name="ObjectShortName">ir_input</obj_property>
+   <wvobject fp_name="/ps2_transmitter_testbench/key_code" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">key_code[7:0]</obj_property>
+      <obj_property name="ObjectShortName">key_code[7:0]</obj_property>
+      <obj_property name="Radix">HEXRADIX</obj_property>
    </wvobject>
-   <wvobject fp_name="/nec_receiver_testbench/nec_in" type="logic" db_ref_id="1">
-      <obj_property name="ElementShortName">nec_in</obj_property>
-      <obj_property name="ObjectShortName">nec_in</obj_property>
-   </wvobject>
-   <wvobject fp_name="/nec_receiver_testbench/last_received_command" type="array" db_ref_id="1">
-      <obj_property name="ElementShortName">last_received_command[7:0]</obj_property>
-      <obj_property name="ObjectShortName">last_received_command[7:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/nec_receiver_testbench/key_down" type="logic" db_ref_id="1">
+   <wvobject fp_name="/ps2_transmitter_testbench/key_down" type="logic" db_ref_id="1">
       <obj_property name="ElementShortName">key_down</obj_property>
       <obj_property name="ObjectShortName">key_down</obj_property>
+   </wvobject>
+   <wvobject fp_name="/ps2_transmitter_testbench/PS2_TX/current_state" type="other" db_ref_id="1">
+      <obj_property name="ElementShortName">current_state</obj_property>
+      <obj_property name="ObjectShortName">current_state</obj_property>
+   </wvobject>
+   <wvobject fp_name="/ps2_transmitter_testbench/ps2_clock" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">ps2_clock</obj_property>
+      <obj_property name="ObjectShortName">ps2_clock</obj_property>
+   </wvobject>
+   <wvobject fp_name="/ps2_transmitter_testbench/ps2_data" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">ps2_data</obj_property>
+      <obj_property name="ObjectShortName">ps2_data</obj_property>
    </wvobject>
 </wave_config>

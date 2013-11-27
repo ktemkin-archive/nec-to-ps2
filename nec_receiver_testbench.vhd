@@ -63,6 +63,8 @@ begin
     --Otherwise, the captured waveform will be rendered periodically.
     --wait;
 
+    --TODO: Automated (assertion-based) tests!
+
 
   end process;
 
